@@ -26,7 +26,9 @@
     done = true;
     clearTimeout(timeoutId);
     stopAudio();
+    const returnFocus = overlay.contains(document.activeElement) ? document.querySelector('.header .brand') : null;
     restorePage();
+    returnFocus?.focus({preventScroll:true});
     overlay.classList.add('is-exiting');
     const target = overlay;
     setTimeout(() => {
