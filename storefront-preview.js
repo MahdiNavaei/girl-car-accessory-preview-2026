@@ -14,8 +14,9 @@
 
   const updateCards = (products) => {
     const cards = [...document.querySelectorAll('.product-grid .product-card, .catalog-grid .product-card')];
-    cards.forEach((card, index) => {
-      const product = products[index];
+    cards.forEach((card) => {
+      const slug = card.dataset.productSlug || new URL(card.getAttribute('href'), location.href).searchParams.get('slug');
+      const product = products.find((item) => item.slug === slug);
       if (!product || !product.images?.length) {
         card.remove();
         return;
@@ -39,8 +40,9 @@
       }
     });
 
+    const productsWithImages = products.filter((product) => product.images?.length);
     const count = document.querySelector('[data-catalog-count]');
-    if (count) count.textContent = `${products.length} محصول مستند · بدون قیمت‌گذاری`;
+    if (count) count.textContent = `${productsWithImages.length} محصول دارای عکس اصلی · بدون قیمت‌گذاری`;
 
     const filterButtons = [...document.querySelectorAll('[data-category-filter]')];
     const applyFilter = (filter) => {
@@ -57,7 +59,7 @@
     filterButtons.forEach((button) => button.addEventListener('click', () => applyFilter(button.dataset.categoryFilter)));
 
     const query = new URLSearchParams(location.search).get('category');
-    const initialFilter = ['interior', 'car-care', 'car-accessories'].includes(query) ? query : 'all';
+    const initialFilter = ['interior', 'car-care'].includes(query) ? query : 'all';
     applyFilter(initialFilter);
   };
 
