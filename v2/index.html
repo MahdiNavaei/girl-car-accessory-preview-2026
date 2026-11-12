@@ -8,39 +8,31 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="icon" href="assets/gca-signature.svg" type="image/svg+xml"><link rel="stylesheet" href="styles.css">
   <style>
-    #gca-cinematic{position:fixed;inset:0;z-index:2147483000;display:grid;place-items:center;overflow:hidden;background:#170d20;color:#fff;direction:ltr}
-    #gca-cinematic[hidden],html.gca-intro-skipped #gca-cinematic{display:none!important}
-    #gca-cinematic .gca-cinematic__ambient{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 58% 45%,#6f347455 0,transparent 48%),radial-gradient(ellipse at 46% 100%,#b9498250 0,transparent 52%),linear-gradient(145deg,#130a1b,#25112f 60%,#160b20)}
-    #gca-cinematic .gca-cinematic__scene{position:relative;z-index:1;width:min(94vw,1000px);aspect-ratio:1070/610;opacity:0;transform:scale(.94);filter:brightness(.42) blur(9px)}
-    #gca-cinematic .gca-cinematic__scene{overflow:hidden;border-radius:24px;outline:1px solid #ffe2f54a;box-shadow:0 34px 110px #05020a80,0 0 70px #b45edf32}
-    #gca-cinematic img{position:absolute;inset:0;width:100%;height:100%;object-fit:fill}
-    #gca-cinematic .gca-cinematic__brand{position:absolute;top:clamp(23px,4vw,46px);left:clamp(22px,5vw,76px);z-index:2;font:800 10px/1.4 system-ui,sans-serif;letter-spacing:.18em}
-    #gca-cinematic .gca-cinematic__skip{position:absolute;top:clamp(20px,4vw,42px);right:clamp(20px,5vw,76px);z-index:3;padding:8px 12px;border:1px solid #ffffff66;border-radius:30px;color:#fff;background:#ffffff0c;font:600 9px system-ui,sans-serif;letter-spacing:.15em;cursor:pointer}
-    #gca-cinematic .gca-cinematic__skip:focus-visible{outline:2px solid #ffc4df;outline-offset:3px}
-    @media(max-width:600px){#gca-cinematic .gca-cinematic__scene{width:94vw}#gca-cinematic .gca-cinematic__brand{font-size:9px}}
+    #gca-film-overlay{position:fixed;inset:0;z-index:2147483000;overflow:hidden;background:#180a22;direction:ltr;opacity:1;visibility:visible;transition:opacity .46s ease,visibility .46s ease;isolation:isolate}
+    #gca-film-overlay[hidden],html.gca-film-disabled #gca-film-overlay{display:none!important}
+    #gca-film-overlay.is-exiting{opacity:0;visibility:hidden;pointer-events:none}
+    #gca-film-overlay video{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+    #gca-film-overlay .gca-film__skip{position:absolute;z-index:2;top:clamp(17px,3vw,34px);right:clamp(17px,3vw,45px);min-width:58px;min-height:36px;padding:9px 16px;border:1px solid #ffe4f2a6;border-radius:24px;color:#fff;background:#270d346b;font:600 11px/1 system-ui,sans-serif;cursor:pointer;backdrop-filter:blur(12px)}
+    #gca-film-overlay .gca-film__skip:focus-visible{outline:3px solid #ffbadb;outline-offset:4px}
+    #gca-film-overlay::after{content:"";position:absolute;z-index:1;bottom:0;left:0;height:2px;width:100%;background:#f59ce2;transform:scaleX(0);transform-origin:left}
+    #gca-film-overlay.is-playing::after{animation:gca-film-progress 3.6s linear forwards}
+    @keyframes gca-film-progress{to{transform:scaleX(1)}}
+    @media(prefers-reduced-motion:reduce){#gca-film-overlay{display:none!important}}
   </style>
   <script>
-    (()=>{const root=document.documentElement,connection=navigator.connection||{};let skip=false;try{skip=sessionStorage.getItem('gca-cinematic-v2-seen')==='1'||matchMedia('(prefers-reduced-motion: reduce)').matches||!!connection.saveData||/^(slow-2g|2g)$/.test(connection.effectiveType||'');if(!skip)sessionStorage.setItem('gca-cinematic-v2-seen','1')}catch{}if(skip){root.classList.add('gca-intro-skipped');return}window.__gcaIntroEligible=true;const style=document.createElement('link');style.rel='preload';style.as='style';style.href='drive-intro/intro.css';document.head.appendChild(style);const art=document.createElement('link');art.rel='preload';art.as='image';art.href='drive-intro/assets/mascot-drive.webp';art.fetchPriority='low';document.head.appendChild(art);window.__gcaIntroFallback=setTimeout(()=>root.classList.add('gca-intro-skipped'),3500)})();
+    (()=>{const root=document.documentElement,conn=navigator.connection||{};let skip=false;try{skip=sessionStorage.getItem('gca-film-v4-seen')==='1'||matchMedia('(prefers-reduced-motion: reduce)').matches||!!conn.saveData||/^(slow-2g|2g)$/.test(conn.effectiveType||'');if(!skip)sessionStorage.setItem('gca-film-v4-seen','1')}catch{skip=true}if(skip){root.classList.add('gca-film-disabled');return}root.classList.add('gca-film-enabled');const css=document.createElement('link');css.rel='preload';css.as='style';css.href='drive-intro/intro.css';document.head.appendChild(css);const poster=document.createElement('link');poster.rel='preload';poster.as='image';poster.href=matchMedia('(max-width:700px)').matches?'drive-intro/assets/poster-mobile.webp':'drive-intro/assets/poster-desktop.webp';poster.fetchPriority='high';document.head.appendChild(poster)})();
   </script>
-  <noscript><style>#gca-cinematic{display:none!important}</style></noscript>
+  <noscript><style>#gca-film-overlay{display:none!important}</style></noscript>
 </head>
 <body>
-  <section id="gca-cinematic" aria-label="پیش درآمد تصویری Girl Car Accessory">
-    <div class="gca-cinematic__ambient" aria-hidden="true"></div>
-    <div class="gca-cinematic__brand">GIRL CAR ACCESSORY</div>
-    <div class="gca-cinematic__scene" data-gca-scene>
-      <img class="gca-cinematic__plate" data-gca-art data-src="drive-intro/assets/mascot-drive.webp" alt="دختر با عینک بنفش در کنار خودروی اسپرت بنفش، تصویر برند Girl Car Accessory" width="1070" height="610" fetchpriority="low">
-      <img class="gca-cinematic__mascot" data-gca-art data-src="drive-intro/assets/mascot-drive.webp" alt="" aria-hidden="true" width="1070" height="610">
-      <img class="gca-cinematic__car" data-gca-art data-src="drive-intro/assets/mascot-drive.webp" alt="" aria-hidden="true" width="1070" height="610">
-      <i class="gca-cinematic__headlight gca-cinematic__headlight--left" aria-hidden="true"></i>
-      <i class="gca-cinematic__headlight gca-cinematic__headlight--right" aria-hidden="true"></i>
-      <i class="gca-cinematic__trail gca-cinematic__trail--one" aria-hidden="true"></i>
-      <i class="gca-cinematic__trail gca-cinematic__trail--two" aria-hidden="true"></i>
-    </div>
-    
-    <button class="gca-cinematic__skip" type="button" data-gca-skip aria-label="رد شدن از پیش درآمد" onclick="window.__gcaCinematicSkip?window.__gcaCinematicSkip():document.documentElement.classList.add('gca-intro-skipped')">SKIP</button>
+  <section id="gca-film-overlay" aria-label="فیلم معرفی Girl Car Accessory">
+    <video id="gca-film" autoplay muted playsinline preload="none" aria-hidden="true" data-poster-desktop="drive-intro/assets/poster-desktop.webp" data-poster-mobile="drive-intro/assets/poster-mobile.webp">
+      <source data-film-desktop="drive-intro/assets/film-desktop.mp4" type="video/mp4">
+      <source data-film-mobile="drive-intro/assets/film-mobile.mp4" type="video/mp4">
+    </video>
+    <button class="gca-film__skip" type="button" aria-label="رد کردن فیلم معرفی">رد کردن</button>
   </section>
-  <script>if(window.__gcaIntroEligible){document.querySelectorAll('[data-gca-art]').forEach(image=>image.src=image.dataset.src)}</script>
+  <script>if(document.documentElement.classList.contains('gca-film-enabled')){const v=document.getElementById('gca-film'),mobile=matchMedia('(max-width:700px)').matches;v.poster=v.dataset[mobile?'posterMobile':'posterDesktop'];const src=v.querySelector(mobile?'[data-film-mobile]':'[data-film-desktop]');src.src=src.dataset[mobile?'filmMobile':'filmDesktop'];v.preload='auto';v.load()}</script>
   <div class="topline"><span>برای ماشینت، با امضای خودت</span><a href="https://www.instagram.com/girl_car_accessory/" target="_blank" rel="noreferrer">در اینستاگرام دنبالمون کن ↗</a></div>
   <header class="header" id="top"><button class="menu-button" aria-label="باز کردن منو" aria-expanded="false"><span></span><span></span></button><nav class="nav" aria-label="ناوبری اصلی"><a href="index.html" aria-current="page">خانه</a><a href="catalog.html">کالکشن‌ها</a><a href="catalog.html?category=car-care">مراقبت خودرو</a><a href="catalog.html?category=interior">استایل کابین</a></nav><a class="brand" href="index.html" aria-label="خانه Girl Car Accessory"><img src="assets/gca-signature.svg" alt="Girl Car Accessory"></a><a class="bag" href="cart.html"><span>نمای پیش‌خرید</span><b aria-hidden="true">✦</b></a></header>
   <main>

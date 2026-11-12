@@ -1,66 +1,43 @@
-/* Automatic, home-page-only cinematic reveal. Audio is attempted silently if policy permits. */
+/* Owner-supplied Film V4 player. Automatic visual playback; sound falls back to muted. */
 (() => {
   'use strict';
-  const stage = document.getElementById('gca-cinematic');
-  if (!stage || !window.__gcaIntroEligible || document.documentElement.classList.contains('gca-intro-skipped')) return;
+  const root=document.documentElement;
+  const overlay=document.getElementById('gca-film-overlay');
+  if(!overlay||!root.classList.contains('gca-film-enabled')||root.classList.contains('gca-film-disabled')) return;
 
-  const scriptUrl = document.currentScript?.src || location.href;
-  const base = new URL('.', scriptUrl);
-  const resource = (path) => new URL(path, base).href;
-  let activeAudio = null;
-  let finishTimer = 0;
-  let removalTimer = 0;
-  let finished = false;
+  const video=overlay.querySelector('video');
+  const skip=overlay.querySelector('.gca-film__skip');
+  if(!video||!video.querySelector('source[src]')) { root.classList.add('gca-film-disabled'); overlay.remove(); return; }
 
-  const finish = (fallback = false) => {
-    if (finished) return;
-    finished = true;
-    clearTimeout(finishTimer);
-    clearTimeout(window.__gcaIntroFallback);
-    if (activeAudio) {
-      activeAudio.pause();
-      activeAudio.currentTime = 0;
-      activeAudio = null;
-    }
-    document.removeEventListener('keydown', onKeyDown);
-    if (fallback) {
-      document.documentElement.classList.add('gca-intro-skipped');
-      return;
-    }
-    stage.classList.add('is-exiting');
-    removalTimer = setTimeout(() => stage.remove(), 470);
+  const css=document.createElement('link');
+  css.rel='stylesheet'; css.href='drive-intro/intro.css';
+  document.head.appendChild(css);
+
+  let finished=false,started=false,fallback=0,removeTimer=0;
+  const finish=()=>{
+    if(finished) return;
+    finished=true; clearTimeout(fallback); clearTimeout(removeTimer);
+    video.pause(); video.removeAttribute('autoplay');
+    document.removeEventListener('keydown',onKey);
+    overlay.classList.add('is-exiting');
+    removeTimer=setTimeout(()=>overlay.remove(),460);
   };
-
-  const onKeyDown = (event) => {
-    if (event.key === 'Escape') finish();
+  const onKey=e=>{if(e.key==='Escape') finish();};
+  const start=()=>{
+    if(started||finished) return;
+    started=true; overlay.classList.add('is-playing');
+    // Attempt the supplied engine audio; browser policy may require silent playback.
+    video.muted=false;
+    video.play().catch(()=>{
+      video.muted=true;
+      video.play().catch(finish);
+    });
   };
-  window.__gcaCinematicSkip = () => finish();
-  stage.querySelector('[data-gca-skip]')?.addEventListener('click', () => finish());
-  document.addEventListener('keydown', onKeyDown);
-
-  const start = () => {
-    if (finished || document.documentElement.classList.contains('gca-intro-skipped')) return;
-    clearTimeout(window.__gcaIntroFallback);
-    window.__gcaIntroStartTime = performance.now();
-    stage.classList.add('is-running');
-
-    // Attempt a short engine cue; browsers that deny autoplay continue silently.
-    try {
-      activeAudio = new Audio(resource('assets/engine-rev.mp3'));
-      activeAudio.preload = 'none';
-      activeAudio.volume = .26;
-      activeAudio.play().catch(() => { activeAudio = null; });
-    } catch { activeAudio = null; }
-
-    finishTimer = setTimeout(() => finish(), 1900);
-  };
-
-  const art = stage.querySelector('.gca-cinematic__plate');
-  art?.addEventListener('error', () => finish(true), {once:true});
-  const style = document.createElement('link');
-  style.rel = 'stylesheet';
-  style.href = resource('intro.css');
-  style.onload = start;
-  style.onerror = () => finish(true);
-  document.head.appendChild(style);
+  skip?.addEventListener('click',finish,{once:true});
+  document.addEventListener('keydown',onKey);
+  video.addEventListener('ended',finish,{once:true});
+  video.addEventListener('error',finish,{once:true});
+  video.addEventListener('canplay',start,{once:true});
+  fallback=setTimeout(finish,4700);
+  if(video.readyState>=3) start();
 })();

@@ -1,7 +1,9 @@
 # Drive Intro integration
 
-Source package: `GirlCarAccessory-DriveIntro-v1.zip`, supplied by the owner. The archive passed CRC validation. Its demo page is not used; this V2 homepage uses the supplied `mascot-drive.webp` artwork and `engine-rev.mp3`. The artwork is layered with CSS masks to reveal the mascot and car separately; overlays add headlight, beam, light-trail, camera, and page-wipe motion. The source artwork remains unchanged.
+Source package: `GirlCarAccessory-Cinematic-Film-v4.zip`, supplied by the owner. ZIP CRC validation passed. The V2 homepage uses the package's 16:9 desktop and 9:16 mobile MP4s plus their matching WebP posters. The supplied GIF and demo homepage are not shipped or used. The package's original files remain in the owner download and the isolated `.playwright-cli/film-v4-inspect/` review folder.
 
-The intro starts automatically on the homepage only, runs for about 2.37 seconds including its transition, and is shown once per tab session. It has a small Skip control and no sound-choice prompt. The engine cue is attempted silently; autoplay rejection does not stop the visual sequence. Reduced-motion, Save-Data, slow 2G, repeat visits, and missing intro assets bypass the animation so the homepage stays reachable. No animation library, GIF, or video is used.
+Media: `film-desktop.mp4` is 1,361,966 bytes (1280 × 720, 30 fps, 3.6 s); `film-mobile.mp4` is 1,121,207 bytes (720 × 1280, 30 fps, 3.6 s). Posters are 27,936 bytes desktop and 24,350 bytes mobile. The matching video source is selected by viewport, loaded only for an eligible homepage visit, and played automatically. The supplied video includes engine audio; playback attempts sound, then retries muted if the browser blocks it. Sound autoplay is browser-policy dependent.
 
-This is the isolated V2 static preview. V1 and production WordPress are not included in this integration.
+The overlay appears on the homepage only, once per tab session. It has a small accessible Skip button, Escape-key skip, a soft fade transition, a 4.7-second failure timeout, and bypasses for reduced motion, Save-Data, slow 2G, and repeat visits. It uses no GIF or animation library. The package README describes the film as a motion-composite prototype, not a hand-rigged 2D/3D animation; some morphing/ghosting is visible in the supplied footage.
+
+This integration is limited to the isolated V2 static preview. V1 and production WordPress are unchanged.
