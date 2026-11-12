@@ -1,10 +1,7 @@
 # Drive Intro integration
 
-Source package: `GirlCarAccessory-DriveIntro-v1.zip` supplied by the owner.
+Source package: `GirlCarAccessory-DriveIntro-v1.zip`, supplied by the owner. The archive passed CRC validation. Its demo page is not used; this V2 homepage uses the supplied `mascot-drive.webp` artwork and `engine-rev.mp3`. The artwork is layered with CSS masks to reveal the mascot and car separately; overlays add headlight, beam, light-trail, camera, and page-wipe motion. The source artwork remains unchanged.
 
-The package ZIP passed CRC validation. Its demo `index.html` was inspected but is not used; only `intro.css`, `intro.js`, `mascot-drive.webp`, `gca-badge.webp`, and `engine-rev.mp3` are included. The owner-provided artwork is preserved as-is. No GIF, video, animation library, CDN script, or external audio is used.
+The intro starts automatically on the homepage only, runs for about 2.37 seconds including its transition, and is shown once per tab session. It has a small Skip control and no sound-choice prompt. The engine cue is attempted silently; autoplay rejection does not stop the visual sequence. Reduced-motion, Save-Data, slow 2G, repeat visits, and missing intro assets bypass the animation so the homepage stays reachable. No animation library, GIF, or video is used.
 
-The script is loaded only by the V2 homepage. It injects its stylesheet after the initial page render. Audio is created and played only after the sound button is clicked. Skip and Escape dismiss immediately; automatic dismissal runs after 2.35 seconds; a session key prevents another automatic display in that tab session. Reduced-motion and Save-Data preferences skip the automatic intro. The page remains usable if the optional stylesheet fails.
-
-This is a static visual preview; no WordPress files or production settings were changed.
-
+This is the isolated V2 static preview. V1 and production WordPress are not included in this integration.

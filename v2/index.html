@@ -3,25 +3,56 @@
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#4d254e"><meta name="description" content="گِرل‌کار اکسسوری؛ بوتیک استایل و اکسسوری خودرو.">
-  <title>Girl Car Accessory — Pink Drive Club</title>
+  <title>Girl Car Accessory | اکسسوری خودرو</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="icon" href="assets/gca-signature.svg" type="image/svg+xml"><link rel="stylesheet" href="styles.css">
+  <style>
+    #gca-cinematic{position:fixed;inset:0;z-index:2147483000;display:grid;place-items:center;overflow:hidden;background:#170d20;color:#fff;direction:ltr}
+    #gca-cinematic[hidden],html.gca-intro-skipped #gca-cinematic{display:none!important}
+    #gca-cinematic .gca-cinematic__ambient{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 58% 45%,#6f347455 0,transparent 48%),radial-gradient(ellipse at 46% 100%,#b9498250 0,transparent 52%),linear-gradient(145deg,#130a1b,#25112f 60%,#160b20)}
+    #gca-cinematic .gca-cinematic__scene{position:relative;z-index:1;width:min(94vw,1000px);aspect-ratio:1070/610;opacity:0;transform:scale(.94);filter:brightness(.42) blur(9px)}
+    #gca-cinematic .gca-cinematic__scene{overflow:hidden;border-radius:24px;outline:1px solid #ffe2f54a;box-shadow:0 34px 110px #05020a80,0 0 70px #b45edf32}
+    #gca-cinematic img{position:absolute;inset:0;width:100%;height:100%;object-fit:fill}
+    #gca-cinematic .gca-cinematic__brand{position:absolute;top:clamp(23px,4vw,46px);left:clamp(22px,5vw,76px);z-index:2;font:800 10px/1.4 system-ui,sans-serif;letter-spacing:.18em}
+    #gca-cinematic .gca-cinematic__skip{position:absolute;top:clamp(20px,4vw,42px);right:clamp(20px,5vw,76px);z-index:3;padding:8px 12px;border:1px solid #ffffff66;border-radius:30px;color:#fff;background:#ffffff0c;font:600 9px system-ui,sans-serif;letter-spacing:.15em;cursor:pointer}
+    #gca-cinematic .gca-cinematic__skip:focus-visible{outline:2px solid #ffc4df;outline-offset:3px}
+    @media(max-width:600px){#gca-cinematic .gca-cinematic__scene{width:94vw}#gca-cinematic .gca-cinematic__brand{font-size:9px}}
+  </style>
+  <script>
+    (()=>{const root=document.documentElement,connection=navigator.connection||{};let skip=false;try{skip=sessionStorage.getItem('gca-cinematic-v2-seen')==='1'||matchMedia('(prefers-reduced-motion: reduce)').matches||!!connection.saveData||/^(slow-2g|2g)$/.test(connection.effectiveType||'');if(!skip)sessionStorage.setItem('gca-cinematic-v2-seen','1')}catch{}if(skip){root.classList.add('gca-intro-skipped');return}window.__gcaIntroEligible=true;const style=document.createElement('link');style.rel='preload';style.as='style';style.href='drive-intro/intro.css';document.head.appendChild(style);const art=document.createElement('link');art.rel='preload';art.as='image';art.href='drive-intro/assets/mascot-drive.webp';art.fetchPriority='low';document.head.appendChild(art);window.__gcaIntroFallback=setTimeout(()=>root.classList.add('gca-intro-skipped'),3500)})();
+  </script>
+  <noscript><style>#gca-cinematic{display:none!important}</style></noscript>
 </head>
 <body>
+  <section id="gca-cinematic" aria-label="پیش درآمد تصویری Girl Car Accessory">
+    <div class="gca-cinematic__ambient" aria-hidden="true"></div>
+    <div class="gca-cinematic__brand">GIRL CAR ACCESSORY</div>
+    <div class="gca-cinematic__scene" data-gca-scene>
+      <img class="gca-cinematic__plate" data-gca-art data-src="drive-intro/assets/mascot-drive.webp" alt="دختر با عینک بنفش در کنار خودروی اسپرت بنفش، تصویر برند Girl Car Accessory" width="1070" height="610" fetchpriority="low">
+      <img class="gca-cinematic__mascot" data-gca-art data-src="drive-intro/assets/mascot-drive.webp" alt="" aria-hidden="true" width="1070" height="610">
+      <img class="gca-cinematic__car" data-gca-art data-src="drive-intro/assets/mascot-drive.webp" alt="" aria-hidden="true" width="1070" height="610">
+      <i class="gca-cinematic__headlight gca-cinematic__headlight--left" aria-hidden="true"></i>
+      <i class="gca-cinematic__headlight gca-cinematic__headlight--right" aria-hidden="true"></i>
+      <i class="gca-cinematic__trail gca-cinematic__trail--one" aria-hidden="true"></i>
+      <i class="gca-cinematic__trail gca-cinematic__trail--two" aria-hidden="true"></i>
+    </div>
+    
+    <button class="gca-cinematic__skip" type="button" data-gca-skip aria-label="رد شدن از پیش درآمد" onclick="window.__gcaCinematicSkip?window.__gcaCinematicSkip():document.documentElement.classList.add('gca-intro-skipped')">SKIP</button>
+  </section>
+  <script>if(window.__gcaIntroEligible){document.querySelectorAll('[data-gca-art]').forEach(image=>image.src=image.dataset.src)}</script>
   <div class="topline"><span>برای ماشینت، با امضای خودت</span><a href="https://www.instagram.com/girl_car_accessory/" target="_blank" rel="noreferrer">در اینستاگرام دنبالمون کن ↗</a></div>
   <header class="header" id="top"><button class="menu-button" aria-label="باز کردن منو" aria-expanded="false"><span></span><span></span></button><nav class="nav" aria-label="ناوبری اصلی"><a href="index.html" aria-current="page">خانه</a><a href="catalog.html">کالکشن‌ها</a><a href="catalog.html?category=car-care">مراقبت خودرو</a><a href="catalog.html?category=interior">استایل کابین</a></nav><a class="brand" href="index.html" aria-label="خانه Girl Car Accessory"><img src="assets/gca-signature.svg" alt="Girl Car Accessory"></a><a class="bag" href="cart.html"><span>نمای پیش‌خرید</span><b aria-hidden="true">✦</b></a></header>
   <main>
-    <section class="hero" aria-labelledby="hero-title"><div class="hero-image"><img src="media/red-car-accessory-set/red-set.jpg" alt="عکس اصلی ست اکسسوری قرمز خودرو در کابین" fetchpriority="high"><span class="image-caption">THE DRIVE QUEEN EDIT · 01</span><span class="hero-stamp">GCA<br><small>DRIVE YOUR WAY</small></span></div><div class="hero-copy"><span class="eyebrow"><i></i> PINK DRIVE CLUB / EST. GCA</span><h1 id="hero-title">ماشینت،<br><em>امضای تو.</em></h1><p>برای مسیرهایی که مال خودت هستند؛ اکسسوری‌های خودرو با حال‌وهوای تو و جزئیاتی که هر روز لبخند می‌آورند.</p><div class="hero-actions"><a class="button button-light" href="catalog.html">ورود به کالکشن <span>←</span></a><a class="text-link" href="#story">قصه‌ی ما ↓</a></div><div class="hero-note"><span>۰۱</span><b>یک بوتیک برای سلیقه‌ی تو</b><i></i> GIRL CAR ACCESSORY</div></div><div class="hero-curve" aria-hidden="true"></div></section>
-    <div class="ticker" aria-label="هویت برند"><span>YOUR DRIVE · YOUR MOOD</span><b>♡</b><span>استایل کابین، به انتخاب تو</span><b>✦</b><span>PINK DRIVE CLUB</span><b>♡</b><span>YOUR DRIVE · YOUR MOOD</span></div>
+    <section class="hero" aria-labelledby="hero-title"><div class="hero-image"><img src="media/red-car-accessory-set/red-set.jpg" alt="عکس اصلی ست اکسسوری قرمز خودرو در کابین" fetchpriority="high"><span class="image-caption">THE DRIVE QUEEN EDIT · 01</span><span class="hero-stamp">GCA<br><small>DRIVE YOUR WAY</small></span></div><div class="hero-copy"><span class="eyebrow"><i></i> GIRL CAR ACCESSORY / EST. GCA</span><h1 id="hero-title">ماشینت،<br><em>امضای تو.</em></h1><p>برای مسیرهایی که مال خودت هستند؛ اکسسوری‌های خودرو با حال‌وهوای تو و جزئیاتی که هر روز لبخند می‌آورند.</p><div class="hero-actions"><a class="button button-light" href="catalog.html">ورود به کالکشن <span>←</span></a><a class="text-link" href="#story">قصه‌ی ما ↓</a></div><div class="hero-note"><span>۰۱</span><b>یک بوتیک برای سلیقه‌ی تو</b><i></i> GIRL CAR ACCESSORY</div></div><div class="hero-curve" aria-hidden="true"></div></section>
+    <div class="ticker" aria-label="هویت برند"><span>YOUR DRIVE · YOUR MOOD</span><b>♡</b><span>استایل کابین، به انتخاب تو</span><b>✦</b><span>GIRL CAR ACCESSORY</span><b>♡</b><span>YOUR DRIVE · YOUR MOOD</span></div>
     <section class="intro section-wrap" id="story"><div class="section-index">01 / THE GCA GIRL</div><div class="intro-grid"><h2>استایل تو،<br><em>از پشت فرمان شروع می‌شود.</em></h2><div><p>Girl Car Accessory یک بوتیک لایف‌استایل خودروست؛ برای آن‌هایی که دوست دارند کابین ماشین‌شان هم مثل استایل شخصی‌شان، انتخاب خودشان باشد.</p><a class="underline-link" href="https://www.instagram.com/girl_car_accessory/" target="_blank" rel="noreferrer">دنیای GCA در اینستاگرام <span>↗</span></a></div></div></section>
     <section class="collections section-wrap" aria-labelledby="collections-title"><div class="section-head"><div><div class="section-index">02 / FIND YOUR LANE</div><h2 id="collections-title">کدوم حال‌وهوای توئه؟</h2></div><a class="underline-link" href="catalog.html">دیدن همه محصولات ←</a></div><div class="moods"><a class="mood mood-plum" href="catalog.html?category=interior"><span class="mood-num">01</span><span class="mood-icon">♡</span><h3>استایل کابین</h3><p>جزئیاتی با امضای تو</p><span class="mood-arrow">↙</span></a><a class="mood mood-lilac" href="catalog.html?category=car-care"><span class="mood-num">02</span><span class="mood-icon">✧</span><h3>مراقبت خودرو</h3><p>برای روزهای درخشان مسیر</p><span class="mood-arrow">↙</span></a><a class="mood mood-pink" href="catalog.html"><span class="mood-num">03</span><span class="mood-icon">♛</span><h3>هدیه‌های خاص</h3><p>انتخابی برای خودت یا عزیزت</p><span class="mood-arrow">↙</span></a></div></section>
     <section class="featured section-wrap" id="products"><div class="section-head"><div><div class="section-index">03 / THE REAL GCA EDIT</div><h2>انتخاب‌های واقعی</h2></div><span class="source-note">عکس‌های اصلی محصولات · قیمت و موجودی ثبت نشده</span></div><div class="product-grid" data-products-grid></div><a class="all-products" href="catalog.html">مشاهده‌ی کاتالوگ کامل <span>←</span></a></section>
     <section class="mood-quiz" aria-labelledby="mood-title"><div class="quiz-orbit" aria-hidden="true">GCA · DRIVE YOUR WAY · GCA</div><div class="quiz-copy"><div class="section-index">04 / YOUR DRIVE, YOUR MOOD</div><h2 id="mood-title">ماشینت چه مودیه؟</h2><p>از بین حال‌وهوای موردعلاقه‌ات انتخاب کن و همون‌جا برو سراغ محصولاتش.</p><div class="quiz-options"><a href="catalog.html?category=interior">پرنسس جاده <span>↙</span></a><a href="catalog.html?category=car-care">مینیمال و مرتب <span>↙</span></a><a href="catalog.html">رنگی و بازیگوش <span>↙</span></a></div></div><div class="quiz-mark" aria-hidden="true"><span>♛</span><b>GCA</b><i>♡</i></div></section>
     <section class="community section-wrap"><div><div class="section-index">05 / THE GIRL CAR COMMUNITY</div><h2>قرارمون، توی مسیر.</h2><p>برای دیدن عکس‌های واقعی محصولات و حال‌وهوای GCA، کنارمون باش.</p></div><a class="button button-plum" href="https://www.instagram.com/girl_car_accessory/" target="_blank" rel="noreferrer">ما را در اینستاگرام ببین ↗</a><span class="community-script">drive<br>with love.</span></section>
   </main>
-  <footer class="footer"><a class="brand" href="index.html"><img src="assets/gca-signature.svg" alt="Girl Car Accessory"></a><p>یک بوتیک کوچک برای حال‌وهوای بزرگِ مسیر.</p><div class="footer-bottom"><span>© GIRL CAR ACCESSORY · PINK DRIVE CLUB</span><a href="catalog.html">کالکشن‌ها</a><a href="https://www.instagram.com/girl_car_accessory/" target="_blank" rel="noreferrer">اینستاگرام ↗</a></div></footer>
+  <footer class="footer"><a class="brand" href="index.html"><img src="assets/gca-signature.svg" alt="Girl Car Accessory"></a><p>یک بوتیک کوچک برای حال‌وهوای بزرگِ مسیر.</p><div class="footer-bottom"><span>© GIRL CAR ACCESSORY · GIRL CAR ACCESSORY</span><a href="catalog.html">کالکشن‌ها</a><a href="https://www.instagram.com/girl_car_accessory/" target="_blank" rel="noreferrer">اینستاگرام ↗</a></div></footer>
   <script src="app.js" defer></script>
   <script src="drive-intro/intro.js" defer></script>
 </body></html>
-
